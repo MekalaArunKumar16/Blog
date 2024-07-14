@@ -29,9 +29,9 @@ const BlogCard = ({ blog, userName }) => (
       </div>
     </div>
     <div className="bg-gradient-to-r from-[#1a237e] to-[#3949ab] text-[#ffd700] py-3 px-6 border-t border-[#ffd700]">
-      <p className="text-sm text-right">
+      <Link to={`/blogs/${blog.id}`} className="text-sm text-right block text-[#ffd700] hover:underline">
         Read more
-      </p>
+      </Link>
     </div>
   </div>
 );
@@ -59,12 +59,19 @@ export default function Blogs() {
   if (usersError) return <div className="text-red-500 text-center mt-4">Error fetching users</div>;
 
   return (
-    <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <>
+    <div className=''>
+      <span></span>
+    </div>
+     <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
       {blogs.map((blog) => {
         const user = users.find((user) => user.id === blog.userId);
         const userName = user ? user.name : 'Unknown User';
         return <BlogCard key={blog.id} blog={blog} userName={userName} />;
       })}
     </div>
+    </>
+   
   );
 }
