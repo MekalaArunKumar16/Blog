@@ -27,6 +27,8 @@ export default function Blog() {
 
   if (blogError) return <div className="text-red-500 text-center mt-4">Error fetching blog</div>;
   if (commentsError) return <div className="text-red-500 text-center mt-4">Error fetching comments</div>;
+   
+  console.log(comments)
 
   return (
     <div className="container mx-auto p-4">

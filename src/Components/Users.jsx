@@ -42,14 +42,6 @@ export default function Users() {
             <img src={getRandomImage()} alt="User" className="rounded-full h-16 w-16 object-cover mb-4" />
             <div className="flex flex-col">
               <a href={`/users/${user.id}`} className="text-2xl font-semibold text-blue-700 hover:underline mb-2">{user.name}</a>
-              <div className="flex justify-between text-gray-600">
-                <div className="flex items-center">
-                  {Math.floor(Math.random() * 100)} Posts
-                </div>
-                <div className="flex items-center">
-                  {Math.floor(Math.random() * 100)} Comments
-                </div>
-              </div>
             </div>
           </div>
         ))}
