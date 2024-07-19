@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchBlogs, fetchUsers } from '../api/api';
 import { Link } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
+
 
 const BlogCard = ({ blog, userName }) => (
   <div className="bg-white rounded-lg overflow-hidden shadow-2xl transition-transform transform hover:scale-105 h-full flex flex-col">
@@ -58,20 +59,25 @@ export default function Blogs() {
   if (blogsError) return <div className="text-red-500 text-center mt-4">Error fetching blogs</div>;
   if (usersError) return <div className="text-red-500 text-center mt-4">Error fetching users</div>;
 
+  
+  const sortedBlogs =
+  [...blogs].sort
+  ((a, b) => a.title.localeCompare(b.title));
+
   return (
     <>
-    <div className=''>
-      <span></span>
-    </div>
-     <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      
-      {blogs.map((blog) => {
-        const user = users.find((user) => user.id === blog.userId);
-        const userName = user ? user.name : 'Unknown User';
-        return <BlogCard key={blog.id} blog={blog} userName={userName} />;
-      })}
-    </div>
+      <div className=''>
+        <span></span>
+      </div>
+      <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedBlogs.map((blog) => {
+          const user = users.find((user) => user.id === blog.userId);
+          const userName = user ? user.name : 'Unknown User';
+          return <BlogCard key={blog.id} blog={blog} userName={userName} />;
+        })}
+      </div>
     </>
-   
   );
 }
+
+
